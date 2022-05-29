@@ -1,0 +1,35 @@
+import React, {useRef, useEffect, useState} from 'react' // importa elemento useRef como desectruturing
+import PropTypes from 'prop-types'
+import useVanta from './../../hooks/useVanta'
+
+const WelcomeScreen = ({ children }) => {
+    const myRef = useRef(null) 
+    // se pasa nulo porque no tiene valor
+    console.log(myRef.current) // valor actual del useRef
+    // en la primera renderizacion el valor del current será null
+    const [vanta, setVanta] = useState(0) inicializa valor en cero
+
+    // el parametro de useEffect debe ser una funcion
+    useEffect (() => {
+      // el valor aqui sera <div>WelcomeScren</div>
+      console.log(myRef.current)
+
+      // vanta === 0 es identico a vanta == false o !vanta
+      if (vanta === 0){
+        setVanta(1)
+      }
+    }, [vanta]) // pasamo a useEffect el array de estados 
+
+    return (
+      //asociar el elemento html (div) con el useRef y acceder al DOM del div
+        <div ref={myRef}> 
+            WelcomeScren
+        </div>
+    )
+}
+
+WelcomeScreen.propTypes = {
+    children: PropTypes.node,
+}
+
+export default WelcomeScreen
